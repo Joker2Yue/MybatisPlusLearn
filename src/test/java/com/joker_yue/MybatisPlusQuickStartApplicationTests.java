@@ -51,7 +51,7 @@ class MybatisPlusQuickStatApplicationTests {
 
     // 测试乐观锁
     @Test
-    public void testOptimisticLocker(){
+    public void testOptimisticLockerSuccess(){
         // 查询用户信息
         User user = userMapper.selectById(1L);
         // 修改用户信息
