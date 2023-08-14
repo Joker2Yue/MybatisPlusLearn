@@ -47,4 +47,18 @@ class MybatisPlusQuickStatApplicationTests {
         int i = userMapper.updateById(user);
         System.out.println("affect rows:" + i);
     }
+
+
+    // 测试乐观锁
+    @Test
+    public void testOptimisticLocker(){
+        // 查询用户信息
+        User user = userMapper.selectById(1L);
+        // 修改用户信息
+        user.setName("Joker九歌");
+        user.setEmail("Joker_yue@qq.com");
+        // 执行更新操作
+        userMapper.updateById(user);
+    }
+
 }
