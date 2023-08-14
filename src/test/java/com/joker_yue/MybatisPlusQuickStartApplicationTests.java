@@ -29,8 +29,22 @@ class MybatisPlusQuickStatApplicationTests {
         user.setAge(20);
         user.setEmail("joker_yue@qq.com");
 
-        int res = userMapper.insert(user);  //没有设置id，却自动生成id
+        int res = userMapper.insert(user);  // 没有设置id，却自动生成id
         System.out.println(res);
     }
 
+    // 测试更新
+    @Test
+    public void testUpdate() {
+        User user = new User();
+        // 想改什么就写上去，不改就不写。会自动拼接sql
+        user.setId(1690952684882145281L);
+        user.setName("joker_yue");
+        user.setAge(20);
+        user.setEmail("joker_yue@qq.com");
+
+        // 注意，虽然名字为byId，但是参数为一个对象
+        int i = userMapper.updateById(user);
+        System.out.println("affect rows:" + i);
+    }
 }
