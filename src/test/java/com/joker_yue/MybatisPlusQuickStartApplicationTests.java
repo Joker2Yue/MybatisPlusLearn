@@ -119,4 +119,29 @@ class MybatisPlusQuickStatApplicationTests {
         System.out.println(userPage.getTotal());    // 总记录数
         System.out.println(userPage.getPages());     // 总页数
     }
+
+    // 删除测试
+    @Test
+    public void testDeletedById(){
+        int i = userMapper.deleteById(1690988409157672961L);
+        System.out.println("Affect rows :"+i);
+    }
+
+    // 批量删除
+    @Test
+    public void testDeleteBatchIds(){
+        int i = userMapper.deleteBatchIds(Arrays.asList(1690952684882145281L, 1690972032879316993L));
+        System.out.println("Affect rows :"+i);
+
+    }
+
+    // 通过Map删除
+    @Test
+    public void testDeleteByMap(){
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("name", "joker_yue");
+        int i = userMapper.deleteByMap(map);
+        System.out.println("Affect rows :"+i);
+    }
+
 }
