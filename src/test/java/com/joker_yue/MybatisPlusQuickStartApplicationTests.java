@@ -49,7 +49,7 @@ class MybatisPlusQuickStatApplicationTests {
     }
 
 
-    // 测试乐观锁
+    // 测试乐观锁-修改成功
     @Test
     public void testOptimisticLockerSuccess(){
         // 查询用户信息
@@ -59,6 +59,25 @@ class MybatisPlusQuickStatApplicationTests {
         user.setEmail("Joker_yue@qq.com");
         // 执行更新操作
         userMapper.updateById(user);
+    }
+
+    // 测试乐观锁-修改失败
+    @Test
+    public void testOptimisticLockerFail(){
+        // 线程1
+        User user = userMapper.selectById(1L);
+        user.setName("Joker111");
+        user.setEmail("Joker_yue@qq.com");
+
+        // 模拟另外一个线程执行了插队操作
+        User user2 = userMapper.selectById(1L);
+        user2.setName("Joker222");
+        user2.setEmail("Joker_yue@qq.com");
+
+        userMapper.updateById(user2);
+
+        // 如果失败，可以使用自旋锁来进行多次提交尝试
+        userMapper.updateById(user);    // 如果没有乐观锁，就会覆盖插队线程的值
     }
 
 }
