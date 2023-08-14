@@ -1,9 +1,6 @@
 package com.joker_yue.pojo;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,5 +27,7 @@ public class User {
     @TableField(fill = FieldFill.INSERT_UPDATE)    // 在插入和更新的时候操作
     private Date updateTime;    // 更新时间
 
+    @Version    // 代表一个乐观锁注解
+    private Integer version;
 
 }
