@@ -21,4 +21,16 @@ class MybatisPlusQuickStatApplicationTests {
         users.forEach(System.out::println);
     }
 
+    // 测试插入
+    @Test
+    public void testInsert() {
+        User user = new User();
+        user.setName("joker_yue");
+        user.setAge(20);
+        user.setEmail("joker_yue@qq.com");
+
+        int res = userMapper.insert(user);  //没有设置id，却自动生成id
+        System.out.println(res);
+    }
+
 }
