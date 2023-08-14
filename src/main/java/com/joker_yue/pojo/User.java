@@ -30,4 +30,7 @@ public class User {
     @Version    // 代表一个乐观锁注解
     private Integer version;
 
+    @TableLogic // 代表逻辑删除
+    private Integer deleted;
+
 }
