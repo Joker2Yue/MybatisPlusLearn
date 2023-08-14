@@ -1,11 +1,14 @@
 package com.joker_yue;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.joker_yue.mapper.UserMapper;
 import com.joker_yue.pojo.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 @SpringBootTest
@@ -51,7 +54,7 @@ class MybatisPlusQuickStatApplicationTests {
 
     // 测试乐观锁-修改成功
     @Test
-    public void testOptimisticLockerSuccess(){
+    public void testOptimisticLockerSuccess() {
         // 查询用户信息
         User user = userMapper.selectById(1L);
         // 修改用户信息
@@ -63,7 +66,7 @@ class MybatisPlusQuickStatApplicationTests {
 
     // 测试乐观锁-修改失败
     @Test
-    public void testOptimisticLockerFail(){
+    public void testOptimisticLockerFail() {
         // 线程1
         User user = userMapper.selectById(1L);
         user.setName("Joker111");
@@ -80,4 +83,40 @@ class MybatisPlusQuickStatApplicationTests {
         userMapper.updateById(user);    // 如果没有乐观锁，就会覆盖插队线程的值
     }
 
+    // 查询操作
+    @Test
+    public void testSelectById() {
+        User user = userMapper.selectById(1L);
+        System.out.println(user);
+    }
+
+    // 测试批量查询
+    @Test
+    public void testSelectByBatchId() {
+        List<User> users = userMapper.selectBatchIds(Arrays.asList(1, 2, 3));
+        users.forEach(System.out::println);
+    }
+
+    // 条件查询
+    @Test
+    public void testSelectByMap() {
+        HashMap<String, Object> map = new HashMap<>();
+        // 自定义查询的条件
+        map.put("name", "joker_yue");
+        map.put("age", 19);
+        List<User> users = userMapper.selectByMap(map);
+        users.forEach(System.out::println);
+    }
+
+    // 测试分页查询
+    @Test
+    public void testPage() {
+        // 参数：当前页，页面大小
+        Page<User> userPage = new Page<>(1, 5);  // 查询第一页，而且只要5个数据
+        userMapper.selectPage(userPage, null);
+
+        userPage.getRecords().forEach(System.out::println);
+        System.out.println(userPage.getTotal());    // 总记录数
+        System.out.println(userPage.getPages());     // 总页数
+    }
 }
