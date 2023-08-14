@@ -1,6 +1,5 @@
 package com.joker_yue.config;
 
-import com.baomidou.mybatisplus.core.injector.ISqlInjector;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.OptimisticLockerInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
@@ -34,12 +33,12 @@ public class MybatisPlusConfig {
 
     // 配置分页拦截器
     @Bean
-    public PaginationInnerInterceptor paginationInnerInterceptor(){
+    public PaginationInnerInterceptor paginationInnerInterceptor() {
         PaginationInnerInterceptor paginationInnerInterceptor = new PaginationInnerInterceptor();
         /*
-        * setOverflow(boolean); 设置请求页面大于最大页数后的操作，true返回首页，false继续请求（默认）
-        * setMaxLimit(Long); 设置单页最大条数，默认500，-1为不限制
-        * */
+         * setOverflow(boolean); 设置请求页面大于最大页数后的操作，true返回首页，false继续请求（默认）
+         * setMaxLimit(Long); 设置单页最大条数，默认500，-1为不限制
+         * */
         return paginationInnerInterceptor;
     }
 
